@@ -1,0 +1,23 @@
+{
+  "name": "reto-asimov-middleware",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "type": "module",
+  "scripts": {
+    "start": "nodemon server.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.27.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.1",
+    "joi": "^17.6.0",
+    "moment": "^2.29.3"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.16"
+  }
+}

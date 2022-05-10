@@ -12,29 +12,16 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async availableDate({rDate}) {
+    async availableDate({_month}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
-        let data = { _month: moment(rDate).format('MM') };
-        let message = { text: MESSAGE.RESERVATION_AVAILABLE_EMPTY, type: MESSAGE.TYPE.INFO };
+        let data = { _month };
+        let message = { text: MESSAGE.TEXT.RESERVATION_AVAILABLE_EMPTY, type: MESSAGE.TYPE.INFO };
 
-        const reservations = await dao.reservation.getByDate(rDate) || [];
-
-        if(reservations){
-            data = Object.keys(
-              reservations.reduce((acum, item) => {
-                return !acum[item.rDate]
-                  ? { ...acum, [item.rDate]: 1 }
-                  : { ...acum, [item.rDate]: acum[item.rDate] + 1 };
-              }, {})
-            )
-              .map((key) => [key, objDays[key]])
-              .filter((e) => e[1] > 2)
-              .map((e) => e[0]);
-            
-            if(data.length > 0){
-                message.text = MESSAGE.TEXT.RESERVATION_DISABLED_DAYS.replace('COUNT', data.length);
-            }
-        }
+        data = await dao.reservation.getAvailableDaysByMonth(_month);
+        
+        if(data.length > 0) {
+            message = { text: MESSAGE.TEXT.RESERVATION_AVAILABLE_DAYS.replace('COUNT', data.length), type: MESSAGE.TYPE.SUCCESS };
+        }            
 
         return { httpStatus, data, message };
     },

@@ -3,7 +3,7 @@ export const URL = {
     API_RESERVATION: '/api/v1/reservation',
     API_RESERVATION_ACTIVE: '/api/v1/reservation/active',
     API_RESERVATION_AVAILABLE: '/api/v1/reservation/available',
-    API_RESERVATION_AVAILABLE_DAYS: '/api/v1/reservation/available-days',
+    API_RESERVATION_AVAILABLE_DATES: '/api/v1/reservation/available-dates',
 }
 
 export const HTTP_STATUS_CODES = {

@@ -25,16 +25,16 @@ const reservation = {
     },
     async getAvailableDaysByMonth(_month){
         const params = { _month }
-        const { data } = await findByQuery(URL.API_RESERVATION_AVAILABLE_DAYS, params)
+        const { data } = await findByQuery(URL.API_RESERVATION_AVAILABLE_DATES, params)
 
         return data
     },
-    async getByDate(rDate) {
-        params = { rDate }
-        const { data } = await findByQuery(URL.API_RESERVATION_DATE, params)
+    // async getByDate(rDate) {
+    //     params = { rDate }
+    //     const { data } = await findByQuery(URL.API_RESERVATION_DATE, params)
     
-        return data
-    },
+    //     return data
+    // },
     async isValid({ rEmail, _date }) {
         const params = { 
             rEmail: encodeURI(rEmail), 

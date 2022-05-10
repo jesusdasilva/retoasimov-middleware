@@ -11,7 +11,7 @@ export default {
     },
     async availableDate({ query }, res, next) {
         try {
-            res.locals = await service.disabledDate(query);
+            res.locals = await service.availableDate(query);
             next();
         } catch (err) {
             next(err);

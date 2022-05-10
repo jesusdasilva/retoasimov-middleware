@@ -9,7 +9,7 @@ export default {
             next(err);
         }
     },
-    async disabledDate({ query }, res, next) {
+    async availableDate({ query }, res, next) {
         try {
             res.locals = await service.disabledDate(query);
             next();

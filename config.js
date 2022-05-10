@@ -2,7 +2,8 @@ export const URL = {
     BASE: 'https://retoasimov-backend.orinokia.ca',
     API_RESERVATION: '/api/v1/reservation',
     API_RESERVATION_ACTIVE: '/api/v1/reservation/active',
-    API_RESERVATION_AVAILABLE: '/api/v1/reservation/available'
+    API_RESERVATION_AVAILABLE: '/api/v1/reservation/available',
+    API_RESERVATION_AVAILABLE_DAYS: '/api/v1/reservation/available-days',
 }
 
 export const HTTP_STATUS_CODES = {
@@ -26,6 +27,8 @@ export const MESSAGE = {
         RESERVATION_CREATE: 'Reservación creada',
         RESERVATION_IS_NOT_DISABLED_DAYS: 'Todas las fechas están disponibles',
         RESERVATION_DISABLED_DAYS: 'Total de Fechas desabilitadas: COUNT',
+        RESERVATION_AVAILABLE_DAYS: 'Hay COUNT Fechas disponibles',
+        RESERVATION_AVAILABLE_EMPTY: 'No hay Fechas disponibles',
     },
     TYPE: {
         SUCCESS: 'success',

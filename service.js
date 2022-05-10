@@ -12,10 +12,10 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async disabledDate({rDate}) {
+    async availableDate({rDate}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
-        let data = []
-        let message = { text: MESSAGE.RESERVATION_IS_NOT_DISABLED_DAYS, type: MESSAGE.TYPE.INFO };
+        let data = { _month: moment(rDate).format('MM') };
+        let message = { text: MESSAGE.RESERVATION_AVAILABLE_EMPTY, type: MESSAGE.TYPE.INFO };
 
         const reservations = await dao.reservation.getByDate(rDate) || [];
 

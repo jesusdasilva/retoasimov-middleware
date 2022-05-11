@@ -23,9 +23,9 @@ const reservation = {
         
         return data
     },
-    async getAvailableDaysByMonth(_month){
+    async getDisabledDatesByMonth(_month){
         const params = { _month }
-        const { data } = await findByQuery(URL.API_RESERVATION_AVAILABLE_DATES, params)
+        const { data } = await findByQuery(URL.API_RESERVATION_DISABLED_DATES, params)
 
         return data
     },

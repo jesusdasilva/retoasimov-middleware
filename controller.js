@@ -9,9 +9,9 @@ export default {
             next(err);
         }
     },
-    async availableDate({ query }, res, next) {
+    async disabledDates({ query }, res, next) {
         try {
-            res.locals = await service.availableDate(query);
+            res.locals = await service.disabledDates(query);
             next();
         } catch (err) {
             next(err);

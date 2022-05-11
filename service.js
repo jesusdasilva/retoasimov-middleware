@@ -12,15 +12,15 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async availableDate({_month}) {
+    async disabledDates({_month}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
         let data = { _month };
-        let message = { text: MESSAGE.TEXT.RESERVATION_AVAILABLE_EMPTY, type: MESSAGE.TYPE.INFO };
+        let message = { text: MESSAGE.TEXT.RESERVATION_ALL_DATES_AVAILABLE, type: MESSAGE.TYPE.INFO };
 
-        data = await dao.reservation.getAvailableDaysByMonth(_month);
+        data = await dao.reservation.getDisabledDatesByMonth(_month);
         
         if(data.length > 0) {
-            message = { text: MESSAGE.TEXT.RESERVATION_AVAILABLE_DAYS.replace('COUNT', data.length), type: MESSAGE.TYPE.SUCCESS };
+            message.text = MESSAGE.TEXT.RESERVATION_DISABLED_DATES.replace('COUNT', data.length);
         }            
 
         return { httpStatus, data, message };

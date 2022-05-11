@@ -5,7 +5,7 @@ const route = Router();
 
 route
     .get("/", controller.list)
-    .get("/available-date", controller.availableDate)
+    .get("/disabled-dates", controller.disabledDates)
     .post("/", validateParams, controller.create);
 
 export default route;

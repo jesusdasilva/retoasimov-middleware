@@ -25,6 +25,19 @@ export default {
 
         return { httpStatus, data, message };
     },
+    async disabledHours({_date}) {
+        let httpStatus = HTTP_STATUS_CODES.OK;
+        let data = { _date };
+        let message = { text: MESSAGE.TEXT.RESERVATION_ALL_HOURS_AVAILABLE, type: MESSAGE.TYPE.INFO };
+
+        data = await dao.reservation.getDisabledHoursByDate(_date);
+        
+        if(data.length > 0) {
+            message.text = MESSAGE.TEXT.RESERVATION_DISABLED_HOURS.replace('COUNT', data.length);
+        }            
+
+        return { httpStatus, data, message };
+    },
     async create({rFirstName, rLastName, rEmail, rPhone, rHour, rDate}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
         let data = { rFirstName, rLastName, rEmail, rPhone, rHour, rDate };

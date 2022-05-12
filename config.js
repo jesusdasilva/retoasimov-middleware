@@ -4,6 +4,7 @@ export const URL = {
     API_RESERVATION_ACTIVE: '/api/v1/reservation/active',
     API_RESERVATION_AVAILABLE: '/api/v1/reservation/available',
     API_RESERVATION_DISABLED_DATES: '/api/v1/reservation/disabled-dates',
+    API_RESERVATION_DISABLED_HOURS: '/api/v1/reservation/disabled-hours',
 }
 
 export const HTTP_STATUS_CODES = {
@@ -27,6 +28,8 @@ export const MESSAGE = {
         RESERVATION_CREATE: 'Reservación creada',
         RESERVATION_ALL_DATES_AVAILABLE: 'Todas las fechas están disponibles',
         RESERVATION_DISABLED_DATES: 'Total de Fechas desabilitadas: COUNT',
+        RESERVATION_ALL_HOURS_AVAILABLE: 'Todas los Horarios están disponibles',
+        RESERVATION_DISABLED_HOURS: 'Total de horas desabilitadas: COUNT',
     },
     TYPE: {
         SUCCESS: 'success',

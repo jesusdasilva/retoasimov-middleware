@@ -17,6 +17,14 @@ export default {
             next(err);
         }
     },
+    async disabledHours({ query }, res, next) {
+        try {
+            res.locals = await service.disabledHours(query);
+            next();
+        } catch (err) {
+            next(err);
+        }
+    },
     async create({ body }, res, next) {
         try {
             res.locals = await service.create(body);

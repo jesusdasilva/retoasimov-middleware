@@ -29,6 +29,12 @@ const reservation = {
 
         return data
     },
+    async getDisabledHoursByDate(_date){
+        const params = { _date }
+        const { data } = await findByQuery(URL.API_RESERVATION_DISABLED_HOURS, params)
+
+        return data
+    },
     // async getByDate(rDate) {
     //     params = { rDate }
     //     const { data } = await findByQuery(URL.API_RESERVATION_DATE, params)

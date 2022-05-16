@@ -1,0 +1,12 @@
+{
+    "apps": [
+        {
+            "name": "retoasimov-middleware",
+            "script": "server.js",
+            "exec_mode": "fork",
+            "instances": 1,
+            "max_memory_restart": "512M",
+            "autorestart": true
+        }
+    ]
+}

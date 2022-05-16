@@ -11,7 +11,7 @@ export default {
     },
     async disabledDates({ query }, res, next) {
         try {
-            res.locals = await service.disabledDates(query);
+            res.locals = await service.disabledDays(query);
             next();
         } catch (err) {
             next(err);
@@ -20,6 +20,14 @@ export default {
     async disabledHours({ query }, res, next) {
         try {
             res.locals = await service.disabledHours(query);
+            next();
+        } catch (err) {
+            next(err);
+        }
+    },
+    async active({ query }, res, next) {
+        try {
+            res.locals = await service.active(query);
             next();
         } catch (err) {
             next(err);

@@ -59,7 +59,9 @@ export function validateParams(req, res, next) {
 		rEmail: Joi.string().email().required().messages({"string.empty": `"rEmail no pude estar vacío`, "any.required": `"rEmail es requerido`}),
 		rPhone: Joi.string().empty(''),
 		rHour: Joi.string().required().messages({"string.empty": `"rHour no pude estar vacío`, "any.required": `"rHour es requerido`}),
-		rDate: Joi.string().required().messages({"string.empty": `"rDate no pude estar vacío`, "any.required": `"rDate es requerido`}),
+		rDay: Joi.string().required().messages({"string.empty": `"rDay no pude estar vacío`, "any.required": `"rDay es requerido`}),
+		rMonth: Joi.string().required().messages({"string.empty": `"rMonth no pude estar vacío`, "any.required": `"rMonth es requerido`}),
+		rYear: Joi.string().required().messages({"string.empty": `"rYear no pude estar vacío`, "any.required": `"rYear es requerido`}),
 	})
 
 	validateRequest(req, res, next, schema)

@@ -12,12 +12,12 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async disabledDates({_month}) {
+    async disabledDays({rYear,rMonth}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
-        let data = { _month };
-        let message = { text: MESSAGE.TEXT.RESERVATION_ALL_DATES_AVAILABLE, type: MESSAGE.TYPE.INFO };
+        let message = {text: MESSAGE.TEXT.RESERVATION_ALL_DATES_AVAILABLE, type: MESSAGE.TYPE.INFO};
 
-        data = await dao.reservation.getDisabledDatesByMonth(_month);
+        const values = {rYear,rMonth}
+        const data = await dao.reservation.getDisabledDays(values) || [];
         
         if(data.length > 0) {
             message.text = MESSAGE.TEXT.RESERVATION_DISABLED_DATES.replace('COUNT', data.length);
@@ -25,12 +25,12 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async disabledHours({_date}) {
+    async disabledHours({rYear,rMonth, rDay}) {
         let httpStatus = HTTP_STATUS_CODES.OK;
-        let data = { _date };
         let message = { text: MESSAGE.TEXT.RESERVATION_ALL_HOURS_AVAILABLE, type: MESSAGE.TYPE.INFO };
 
-        data = await dao.reservation.getDisabledHoursByDate(_date);
+        const values = {rYear,rMonth, rDay}
+        const data = await dao.reservation.getDisabledHours(values) || [];
         
         if(data.length > 0) {
             message.text = MESSAGE.TEXT.RESERVATION_DISABLED_HOURS.replace('COUNT', data.length);
@@ -38,17 +38,33 @@ export default {
 
         return { httpStatus, data, message };
     },
-    async create({rFirstName, rLastName, rEmail, rPhone, rHour, rDate}) {
+    async active({ rEmail, rYear, rMonth, rDay }) {
         let httpStatus = HTTP_STATUS_CODES.OK;
-        let data = { rFirstName, rLastName, rEmail, rPhone, rHour, rDate };
+        let message = { text: MESSAGE.TEXT.RESERVATION_ALLREADY_EXISTS, type: MESSAGE.TYPE.INFO };
+
+        const values = { rEmail, rYear, rMonth, rDay }
+        const data = await dao.reservation.getActive(values) || [];
+        
+        if(data.length == 0) {
+            message.text = MESSAGE.TEXT.RESERVATION_RESERVATION_NOT_ACTIVE;
+        }            
+
+        return { httpStatus, data, message };
+    },
+    async create({rFirstName, rLastName, rEmail, rPhone, rHour, rDay, rMonth, rYear}) {
+        let httpStatus = HTTP_STATUS_CODES.OK;
         let message = { text: MESSAGE.TEXT.RESERVATION_ALLREADY_EXISTS, type: MESSAGE.TYPE.ERROR };
  
-        if(await dao.reservation.isValid({ rEmail, _date: moment().format('YYYY-MM-DD') })){
-
+        const values = { rEmail, rYear, rMonth, rDay }
+        let data = await dao.reservation.getActive(values) || {rFirstName, rLastName, rEmail, rPhone, rHour, rDay, rMonth, rYear};
+        
+        if(data.length == 0){
             message = { text: MESSAGE.TEXT.RESERVATION_IS_NOT_AVAILABLE, type: MESSAGE.TYPE.ERROR };
+            
+            const values = {rYear,rMonth, rDay, rHour}
 
-            if(await dao.reservation.isAvailable({ rDate, rHour })){
-                const values = { rFirstName, rLastName, rEmail, rPhone, rHour, rDate };
+            if(await dao.reservation.isAvailable(values)){ 
+                const values = {rFirstName, rLastName, rEmail, rPhone, rHour, rDay, rMonth, rYear};
 
                 data = await dao.reservation.create(values);
                 httpStatus = HTTP_STATUS_CODES.CREATED;

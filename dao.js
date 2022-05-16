@@ -12,9 +12,7 @@ const httpClient = axios.create({
 
 const findByQuery = async (url, params = '') => {
 
-    const response = await httpClient.get(url, { params })
-
-    return response
+    return  await httpClient.get(url, { params }); console.log(response)
 }
 
 const reservation = {
@@ -23,43 +21,34 @@ const reservation = {
         
         return data
     },
-    async getDisabledDatesByMonth(_month){
-        const params = { _month }
-        const { data } = await findByQuery(URL.API_RESERVATION_DISABLED_DATES, params)
+    async getDisabledDays({rYear,rMonth}){
+        const params = {rYear,rMonth}
+        const { data } = await findByQuery(URL.API_RESERVATION_DISABLED_DAYS, params)
 
         return data
     },
-    async getDisabledHoursByDate(_date){
-        const params = { _date }
+    async getDisabledHours({rYear,rMonth, rDay}){
+        const params = {rYear,rMonth, rDay}
         const { data } = await findByQuery(URL.API_RESERVATION_DISABLED_HOURS, params)
 
         return data
     },
-    // async getByDate(rDate) {
-    //     params = { rDate }
-    //     const { data } = await findByQuery(URL.API_RESERVATION_DATE, params)
-    
-    //     return data
-    // },
-    async isValid({ rEmail, _date }) {
-        const params = { 
-            rEmail: encodeURI(rEmail), 
-            rDate: _date
-        }
+    async getActive({ rEmail, rYear,rMonth, rDay }) {
+        const params = { rEmail, rYear,rMonth, rDay }
         const { data } = await findByQuery(URL.API_RESERVATION_ACTIVE, params)
-
-        return data.length === 0
+    
+        return data
     },
-    async isAvailable({ rDate, rHour }) {
-        const params = { rDate, rHour: encodeURI(rHour) }
-        const { data } = await findByQuery(URL.API_RESERVATION_AVAILABLE, params)
+    async isAvailable({ rYear, rMonth, rDay, rHour }) {
+        const params = { rYear,rMonth, rDay, rHour }
+        const { data } = await findByQuery(URL.API_RESERVATION_AVAILABLE_HOUR, params)
         
         return data.length === 0
     },
-    async create({ rFirstName, rLastName, rPhone, rEmail, rHour, rDate }) {
-        const params = { rFirstName, rLastName, rPhone, rEmail, rHour, rDate }
-        console.log(URL.API_RESERVATION,)
+    async create({ rFirstName, rLastName, rPhone, rEmail, rYear, rMonth, rDay, rHour }) {
+        const params = { rFirstName, rLastName, rPhone, rEmail, rYear, rMonth, rDay, rHour }
         const { data } = await httpClient.post(URL.API_RESERVATION+'/', params)
+        
         return data
     }
 }

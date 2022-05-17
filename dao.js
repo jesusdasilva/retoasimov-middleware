@@ -12,7 +12,7 @@ const httpClient = axios.create({
 
 const findByQuery = async (url, params = '') => {
 
-    return  await httpClient.get(url, { params }); console.log(response)
+    return  await httpClient.get(url, { params });
 }
 
 const reservation = {
